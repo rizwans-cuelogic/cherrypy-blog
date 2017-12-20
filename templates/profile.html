@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-4 col-md-4">
+				{% for message in messages %}
+					<p class="text-center">	{{ message }}</p>
+				{% endfor %}
+				<h1>User Profile</h1>
+			</div>
+		</div><br>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="" method="post" name="register">
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+					
+            			<label for="title" class="control-label">Username</label><br>
+            			<input type="text" class="form-control" name=username value="{{ user.username }}" required readonly="">
+            			 
+        			</div>
+    			</div>
+    			<div class="row">
+					<div class="form-group col-md-12">
+					
+            			<label for="email" class="control-label">Email</label><br>
+            			<input type="email" class="form-control" name="email" value="{{ user.email }}" required>  
+        			</div>
+    			</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+		            	<label for="address" class="control-label">Address</label><br>
+		            	<textarea class="form-control" name=Address rows="5">
+		            		{% if user.Address %}
+		            				{{ user.Address }}
+							{% endif %}
+		            	</textarea>
+		            </div>  
+		        </div>
+		        <div class="row">
+					<div class="form-group col-md-12">
+						<label for="contact" class="control-label">Contact</label><br>
+		            	<input type="tel" class="form-control" name="contact">  
+		        	</div>
+		    	</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="gender" class="control-label">Gender</label><br>
+		            	<select class="form-control" name="gender">
+		            		<option value="Male">Male</option>
+		            		<option value="Female">Female</option>
+		            		<option value="Other">Other</option>
+		            	</select> 
+		        	</div>
+		    	</div>
+		    	<input type="submit" value="Save" class="btn btn-success">
+    			</form>
+    		</div>
+			
+		</div>
+	</div>
+{% endblock %}

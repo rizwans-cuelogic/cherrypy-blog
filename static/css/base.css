@@ -1,0 +1,45 @@
+.navbar {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  font-size: 12px;
+  letter-spacing: 5px;
+}
+.navbar-nav  li a:hover {
+  color: #1abc9c !important;
+}
+p {font-size: 16px;}
+
+.bg-4 { 
+  background-color: #2f2f2f; /* Black Gray */
+  color: #fff;
+  bottom:0;
+}
+.middle{
+  padding-top:50px;
+}
+
+footer{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+body{
+  position: relative;
+  padding-bottom: 88px;
+}
+.color-style{ 
+  color:#777;   
+}
+.margin-tp{
+  margin-top:20px;
+}
+.landing{
+    background-image: url("/static/images/home-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:-webkit-calc(100% - (80px));;
+    width: 100%;
+  }

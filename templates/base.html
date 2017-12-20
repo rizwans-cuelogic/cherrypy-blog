@@ -1,0 +1,58 @@
+<html>
+	<head>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>      
+
+    {% block head %}
+    {% endblock %}
+	</head>
+	<body>
+  <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      {% if not request.login %}
+        <a class="navbar-brand" href="/">Blogger</a>
+      {% else %}
+        <a class="navbar-brand" href="/user/home">Blogger</a>
+      {% endif %}
+
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      {% if request.login %}
+        <ul class="nav navbar-nav">
+          <li><a href="/user/user_profile">Edit Profile</a></li>
+          <li><a href="#">Add Blog</a></li>
+          <li><a href="#">List Blog</a></li>
+          <li><a href="#">All Blogs</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/user/logout">Logout</a></li>
+        </ul>
+
+      {% else %}
+       <ul class="nav navbar-nav navbar-right">
+          <li><a href="/user/login">Login</a></li>
+          <li><a href="/user/register">Register</a></li>
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+  
+		{% block content %}
+
+		{% endblock %}
+
+  <footer class="container-fluid bg-4 text-center">
+    <p class="middle">Blogger best blogging platform <a href="#">Rizwan Shaikh</a></p> 
+  </footer>
+  </body>
+</html>	

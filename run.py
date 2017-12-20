@@ -1,6 +1,7 @@
 import os
 import cherrypy
 from views.index import RootClass
+from views.user_management import UserClass
 from models.usermodel import ORMBase
 from cp_sqlalchemy import SQLAlchemyTool, SQLAlchemyPlugin
 
@@ -15,28 +16,37 @@ def start_server():
 	server_config = {
 
 		"server.socket_host":'0.0.0.0',
-		"server.socket_port":8095,
-		"engine.autoreload.on": False,
+		"server.socket_port":9000,
+		"engine.autoreload.on": True,
 
 		"tools.sessions.on":True,
 		"tools.sessions.storage_type":"file",
 		"tools.sessions.storage_path":sessions_dir,
-		"tools.sessions.timeout":180
+		"tools.sessions.timeout":180,
+
 	}
 
 	application_config = {
-		'/':{'tools.staticdir.root':os.getcwd()},
+		'/':{'tools.staticdir.root':os.getcwd(),
+			'tools.db.on':True,
+			'tools.auth.on': True},
 		'/static' : {'tools.staticdir.on': True,
 					'tools.staticdir.dir':'static'
-					}
+					},			
+
 	}
 	cherrypy.tools.db = SQLAlchemyTool()
-	SQLAlchemyPlugin(
+	sqlalchemy_plugin=SQLAlchemyPlugin(
 		cherrypy.engine, ORMBase, 'postgresql://postgres:admin123@localhost:5432/blog_cherry'
 	)
+	sqlalchemy_plugin.subscribe()
+	sqlalchemy_plugin.create()
 	cherrypy.config.update(server_config)
-	cherrypy.tree.mount(RootClass(),'/',config=application_config)
+	cherrypy.root = RootClass()
+	cherrypy.root.user = UserClass()
+	cherrypy.tree.mount(cherrypy.root,'/',config=application_config)
 	cherrypy.engine.start()
+	cherrypy.engine.block()
 
 
 

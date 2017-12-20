@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="container">
+	<div class="modal-dialog modal-sm">
+	<div class="modal-content">
+      		<div class="modal-header">
+        		<h1 class="modal-title color-style">Register</h1>
+     		</div>
+    <div class="modal-body">
+	<form action="" method="post" name="register">
+		{% if error %}
+			
+			<span style="color:red">{{ error }}</span>
+
+		{% endif %}
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label for="title" class="control-label">Username</label><br>
+            	<input type="text" name="username" class="form-control">  
+        	</div>
+    	</div>
+    	<div class="row">
+			<div class="form-group col-md-12">
+				<label for="email" class="control-label">Email</label><br>
+            	<input type="email" class="form-control" name="email">  
+        	</div>
+    	</div>
+    	<div class="row">
+			<div class="form-group col-md-12">
+				{% if password_error %}
+		    		<span class="control-label" style="color:red">{{ password_error }} </span><br>
+    			{% endif %}
+            	<label for="password" class="control-label">Password</label><br>
+            	<input type="password" name="password" class="form-control">	
+            </div>  
+        </div>
+  		<div class="row">
+			<div class="form-group col-md-12">
+            	<label for="confirm_password" class="control-label">Confirm Password</label><br>
+            	<input type="password" name="confirm_password" class="form-control">  
+        	</div>
+    	</div>
+		<input type="submit" value="Register" class="btn btn-success form-control">
+	</form>
+	</div>
+	</div>
+	</div>
+</div>
+{% endblock %}
