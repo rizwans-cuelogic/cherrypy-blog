@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+	{% for message in messages %}
+		<p class="text-center">{{ message }}</p>
+	{% endfor %}
 	<h1 class="text-center"> hi {{ request.login }}</h1>
+	
 {% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="/static/css/listblog.css') }}"/>
+{% endblock %}
+
+{% block content %}
+	<div class="container-fluid text-center">
+	{% for message in messages %}
+    		<p class="margin-tp color-style">{{ message }}</p>
+  	{% endfor %}
+  	</div>
+	<div class="container">
+	{% if blogs %}
+	<div class="table-responsive">
+  		<table class="table results">
+  		<tbody>
+	{% for blog in blogs %}
+			<tr>
+				<td class="content-middle">
+					<h3>{{ loop.index }}</h3>			
+				</td>
+				<td>
+					<h3><a href="/blog/blog_detail/{{ blog.id }}">{{ blog.title }}</a></h3>
+					<p class="blog-text">{{ blog.content | striptags | safe| truncate(150,True)}}</p>
+				</td>
+				<td class="content-middle text-right">
+					<a class="btn btn-primary" href="/blog/blog_edit/{{ blog.id }}">Edit</a>		
+				</td>
+				<td class="content-middle text-right">
+					<a class="btn btn-danger" href="">Delete</a>					
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+		</table>
+	</div>	
+	{% else %}
+		<h3 class="text-center">you dont have any blog</h3>
+	{% endif %}
+	</div>
+
+{% endblock %}
+

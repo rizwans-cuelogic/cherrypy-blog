@@ -106,8 +106,7 @@ class UserClass:
 
 			
 			if cherrypy.request.method == "POST":
-				import pdb
-				pdb.set_trace()
+				
 				user.username=username
 				user.email = email
 				user.contact = contact

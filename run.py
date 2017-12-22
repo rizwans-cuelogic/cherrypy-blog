@@ -2,6 +2,7 @@ import os
 import cherrypy
 from views.index import RootClass
 from views.user_management import UserClass
+from views.blog_management import BlogClass
 from models.usermodel import ORMBase
 from cp_sqlalchemy import SQLAlchemyTool, SQLAlchemyPlugin
 
@@ -44,6 +45,7 @@ def start_server():
 	cherrypy.config.update(server_config)
 	cherrypy.root = RootClass()
 	cherrypy.root.user = UserClass()
+	cherrypy.root.blog = BlogClass()
 	cherrypy.tree.mount(cherrypy.root,'/',config=application_config)
 	cherrypy.engine.start()
 	cherrypy.engine.block()

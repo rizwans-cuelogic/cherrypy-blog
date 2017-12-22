@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<scri   pt src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script>
+	$(function() {
+		$( ".dtpick" ).datepicker({ dateFormat: 'yy-mm-dd',
+									minDate:0
+									});
+	});
+	</script>
+	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+	<script>tinymce.init({ selector:'textarea' ,
+							setup: function(ed) {
+        ed.on('submit', function(e) { ed.save(); });
+    }
+						});</script>
+	<style>
+		.margin-bt{
+			margin-bottom: 20px;
+		}
+		.dtpick{
+			width:30%;
+		}
+		#ui-datepicker-div{ top:450px !important; }
+	</style>
+{% endblock %}
+{% block content %}
+	
+<div class="row">
+<div class="container">
+	<div class="col-md-10">
+		<h2 class="margin-bt">Edit Blog</h2>
+	
+		<form name="editform" action="/blog/editblog/{{ blog.id }}" method="post">
+			<div class="row">
+				<div class="form-group col-md-12">
+					
+	            	<label for="title" class="control-label" required>*Title</label><br>
+	            	<input type="text" class="form-control" name="title" value="{{ blog.title }}" required>  
+	        	</div>
+	    	</div>
+			
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label for="content" class="control-label">*Content</label><br>
+					<textarea class=".content" rows="15" name="content" value="{{ blog.content }}"></textarea>	  
+	        	</div>
+	    	</div>
+	  
+			<div class="row">
+				<div class="form-group col-md-12">
+				
+            	<label for="published_d" class="control-label">Publication_date</label><br>
+            	<input type="text" name=published_d class="form-control dtpick" value ="{{ blog.published_date.date() }}">
+            	  
+            	</div>  
+        	</div>
+	        <div class="row">
+				<div class="form-group col-md-12">
+	            	<button type="submit" class="btn btn-success">Save</button>	
+	            </div>  
+	        </div>		
+			
+		</form>
+	</div>
+</div>
+</div>
+
+{% endblock %}
