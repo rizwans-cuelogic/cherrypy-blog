@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block head %}
-	<link rel="stylesheet" type="text/css" href="/static/css/listblog.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/listblog.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/paginator.css"/>
 {% endblock %}
 
 {% block content %}
@@ -27,12 +28,13 @@
 					<a class="btn btn-primary" href="/blog/blog_edit/{{ blog.id }}">Edit</a>		
 				</td>
 				<td class="content-middle text-right">
-					<a class="btn btn-danger" href="">Delete</a>					
+					<a class="btn btn-danger" href="/blog/blog_delete/{{ blog.id }}">Delete</a>					
 				</td>
 			</tr>
 		{% endfor %}
 		</tbody>
 		</table>
+		{% include 'paginator.html' %}
 	</div>	
 	{% else %}
 		<h3 class="text-center">you dont have any blog</h3>

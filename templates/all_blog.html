@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="/static/css/allblog.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/paginator.css"/>
+{% endblock %}
+{% block content %}
+	<div class="container">
+	{% if blogs %}
+	<div class="table-responsive">
+  		<table class="table results">
+  		<tbody>
+	{% for blog in blogs | sort(attribute='id',reverse=True) %}
+			<tr>
+				<td class="content-middle">
+					<h3>{{ loop.index }}</h3>			
+				</td>
+				<td>
+					<h3><a href="/blog/blog_detail/{{ blog.id }}">{{ blog.title }}</a></h3>
+					<span class="blog-author">By <a href="#"><strong>{{blog.author.username}}</strong></a></span>
+					<p class="blog-text">{{ blog.content | striptags | safe| truncate(55,True)}}</p>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+		</table>
+	</div>
+	{% include 'paginator.html' %}	
+	{% else %}
+		<h3 class="text-center">No blog found.</h3>
+	{% endif %}
+	</div>
+
+{% endblock %}

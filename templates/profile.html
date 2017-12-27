@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<style>
+	textarea{
+		overflow: hidden;
+		resize:none;
+	}
+		
+</style>
+{% endblock %}
+
 {% block content %}
 	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-4 col-md-4">
 				{% for message in messages %}
-					<p class="text-center">	{{ message }}</p>
+					<p class="margin-tp text-center">	{{ message }}</p>
 				{% endfor %}
 				<h1>User Profile</h1>
 			</div>
@@ -33,11 +43,7 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 		            	<label for="address" class="control-label">Address</label><br>
-		            	<textarea class="form-control" name=Address rows="5">
-		            		{% if user.Address %}
-		            				{{ user.Address }}
-							{% endif %}
-		            	</textarea>
+		            	<textarea class="form-control" name=Address rows="5">{% if user.Address %}{{ user.Address }}{% endif %}</textarea>
 		            </div>  
 		        </div>
 		        <div class="row">

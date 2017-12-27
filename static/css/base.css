@@ -36,10 +36,3 @@ body{
 .margin-tp{
   margin-top:20px;
 }
-.landing{
-    background-image: url("/static/images/home-bg.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height:-webkit-calc(100% - (80px));;
-    width: 100%;
-  }

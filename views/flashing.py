@@ -2,6 +2,7 @@ import os
 import logging
 from jinja2 import Environment,FileSystemLoader
 import cherrypy
+from .momentjs import momentjs
 
 env = Environment(loader = FileSystemLoader('./templates')) 
 
@@ -67,5 +68,7 @@ def get_messages():
         return list()
         
 def render_template(template, **kwargs):
+    env.globals['url'] = cherrypy.url
+    env.globals['momentjs'] = momentjs
     kwargs['messages'] = get_messages()
     return env.get_template(template).render(**kwargs)

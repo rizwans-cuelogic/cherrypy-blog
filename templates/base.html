@@ -18,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      {% if not request.login %}
+      {% if not cherrypy.session['_cp_username'] %}
         <a class="navbar-brand" href="/">Blogger</a>
       {% else %}
         <a class="navbar-brand" href="/user/home">Blogger</a>
@@ -26,12 +26,12 @@
 
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      {% if request.login %}
+      {% if cherrypy.session['_cp_username'] %}
         <ul class="nav navbar-nav">
           <li><a href="/user/user_profile">Edit Profile</a></li>
           <li><a href="/blog/addblog">Add Blog</a></li>
           <li><a href="/blog/listblog">List Blog</a></li>
-          <li><a href="#">All Blogs</a></li>
+          <li><a href="/blog/all_blog">All Blogs</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/user/logout">Logout</a></li>
@@ -50,9 +50,7 @@
 		{% block content %}
 
 		{% endblock %}
-
-  <footer class="container-fluid bg-4 text-center">
-    <p class="middle">Blogger best blogging platform <a href="#">Rizwan Shaikh</a></p> 
-  </footer>
-  </body>
+<footer class="container-fluid bg-4 text-center">
+  <p class="middle">Blogger best blogging platform <a href="#">Rizwan Shaikh</a></p> 
+</footer>  
 </html>	

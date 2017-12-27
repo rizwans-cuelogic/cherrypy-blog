@@ -1,0 +1,47 @@
+.blog-header{
+	margin-bottom:21px;
+}
+.blog-header h1{
+	margin-top:0px;
+	margin-bottom:7px;
+	word-wrap: break-word;
+	font-size:41px;
+	line-height:50px;
+}
+.blog-author{
+	font-size:11px;
+}
+.blog-author a{
+	margin-left:3px;
+	color:black;
+	text-decoration:none;
+}
+main{
+	font-size:15px;
+	line-height:26px;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.blog-content p{
+	word-wrap: break-word;
+	margin-bottom:26px;
+}
+main h3{
+    font-size: 21px;
+}
+.mr-l:nth-child(1n+2) {
+	margin-left: 50px;
+}
+h4{
+	font-family: sans;
+}
+.sub-text{
+	font-family:verdana;
+	font-size:11px;
+}
+.blog-author{
+	font:-webkit-mini-control;
+}
+.author-mr{
+	margin-right:30px;
+}

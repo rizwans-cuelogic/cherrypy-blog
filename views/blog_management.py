@@ -1,7 +1,7 @@
 import cherrypy
-
-from jinja2 import Environment,FileSystemLoader
-from .index import RootClass  
+import pagecalc
+from sqlalchemy import desc
+from jinja2 import Environment,FileSystemLoader  
 from helpers.register_helper import (check_empty_data,
 									check_password_length,
 									check_password_match)
@@ -9,7 +9,6 @@ from models.usermodel import User,Blog
 from .auth import require,check_credentials
 from views.flashing import flash,render_template
 
-from .user_management import SESSION_KEY
 
 env = Environment(loader = FileSystemLoader('./templates')) 
 
@@ -38,52 +37,87 @@ class BlogClass(object):
 				raise cherrypy.HTTPRedirect('/user/home')				
 
 
-		return render_template('add_blog.html',request= cherrypy.request)
+		return render_template('add_blog.html',request= cherrypy.request,cherrypy=cherrypy)
 		
 
 	@cherrypy.expose
 	@require()
-	def listblog(self):
-		
+	def listblog(self,page=1):
+
+		page = int(page)
 		email= cherrypy.request.login
 		user = cherrypy.request.db.query(User).filter_by(email=email).first()
 
-		blogs =user.blogs.all()
-		
-		return render_template('list_blog.html',blogs=blogs,request=cherrypy.request)
+		blog =user.blogs.filter_by().order_by(desc(Blog.id)).all()
+		paginator = pagecalc.Paginator(total = len(blog), by = 10)
+		blogs = list(page,blog,limit=10)
+		pages = paginator.paginate(page)
+
+		return render_template('list_blog.html',blogs=blogs,paginator=pages,request=cherrypy.request,cherrypy=cherrypy)
 
 	@cherrypy.expose
-	@require()
 	def blog_detail(self,id=None):
 		
-
 		blog = cherrypy.request.db.query(Blog).filter_by(id = id).first()
 
 		if blog:
 
-			return render_template('detail_blog.html',blog=blog,request=cherrypy.request)
+			return render_template('detail_blog.html',blog=blog,request=cherrypy.request,cherrypy=cherrypy)
 
 
 	@cherrypy.expose
 	@require()
 	def blog_edit(self,id=None,title=None,content=None,published_d=None):
-		import pdb
-		pdb.set_trace()
-
+		
 		blog = cherrypy.request.db.query(Blog).filter_by(id = id).first()
 
 		if blog:
 
-			return render_template('edit_blog.html',blog=blog,request=cherrypy.request)
+			if cherrypy.request.method == "POST":
 
-		if cherrypy.request.method == "POST":
+				blog.title= title
+				blog.content = ""
+				blog.content = content
 
-			blog.title= title
-			blog.content = content
+				if published_d:
+					blog.published_date = published_d
 
-			if published_d:
-				blog.published_date = published_d
+				cherrypy.request.db.commit()
+				flash("Blog Saved Successfully.")
+				raise cherrypy.HTTPRedirect('/blog/listblog')
 
-			cherrypy.request.db.commit()	 
+			return render_template('edit_blog.html',blog=blog,request=cherrypy.request,cherrypy=cherrypy)
+
+	@cherrypy.expose
+	@require()
+	def blog_delete(self,id=None):
+
+		blog = cherrypy.request.db.query(Blog).filter_by(id = id).first()
+
+		if blog:		
+
+			cherrypy.request.db.delete(blog)
+			cherrypy.request.db.commit()
+			flash("Blog Deleted Successfully.")
+			raise cherrypy.HTTPRedirect('/blog/listblog')
 
 
+	@cherrypy.expose
+	@require()
+	def all_blog(self,page=1):
+
+		page = int(page)
+		email= cherrypy.request.login
+		user = cherrypy.request.db.query(User).filter_by(email=email).first()
+
+		blog = cherrypy.request.db.query(Blog).all()
+		paginator = pagecalc.Paginator(total = len(blog), by = 10)
+		blogs = list(page,blog,limit=10)
+		pages = paginator.paginate(page)
+
+		return render_template('all_blog.html',blogs=blogs,paginator=pages,request=cherrypy.request,cherrypy=cherrypy)
+
+
+def list(page,data,limit):
+
+	return data[(page - 1) * limit:page * limit]

@@ -1,9 +1,41 @@
 {% extends 'base.html' %}
-
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="/static/css/paginator.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/home.css"/>
+	<script src="/static/js/moment.min.js"></script>
+{% endblock %}
 {% block content %}
-	{% for message in messages %}
-		<p class="text-center">{{ message }}</p>
-	{% endfor %}
-	<h1 class="text-center"> hi {{ request.login }}</h1>
-	
+	<section class="top-margin-40">
+		<div class="container">
+			<div class="container-fluid text-center">
+			{% for message in messages %}
+    			<p class="margin-tp">{{ message }}</p>
+  			{% endfor %}
+  			</div>
+
+			<div class="row">
+				<main class="col-md-8">
+				<h4 class="separator">LATEST BLOGS</h4>
+					{% for blog in blogs %}
+					{% if not loop.index is divisibleby 2 %}
+					<div class="row">
+					{% endif %}
+						<div class="col-md-6">
+							<div class="latest-blog">
+								<div class="latest-text">
+									<h3><a href="/blog/blog_detail/{{ blog.id }}" title="{{blog.title}}">{{blog.title}}</a></h3>
+									<span class="author-text"><a href=""><strong>{{ blog.author.username }}</strong></a> -   {{ momentjs(blog.published_date).format('LL') }}</span>
+									
+								</div>
+							</div>		
+						</div>
+					{% if loop.index is divisibleby 2 %}
+					</div>
+					{% endif %}
+					{% endfor %}
+				</main>
+			</div>
+		</div>
+		{% include 'paginator.html' %}
+	</section>
 {% endblock %}

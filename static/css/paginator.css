@@ -1,0 +1,12 @@
+
+#paginator{
+  text-align: center;
+}
+#paginator .active {
+  font-size   : 16pt;
+  font-weight : bold;
+}
+#paginator a {
+  display   : inline-block;
+  min-width : 12px; 
+}

@@ -1,0 +1,30 @@
+.table>tbody>tr>td.content-middle,
+.table>thead>tr>th.content-middle{
+	vertical-align:middle;
+}
+.blog-text{
+	font-size: 13px;
+    color: #777;
+    margin-top: 9px;
+   	white-space:normal;
+}
+.table h3{
+	font-size:21px;
+	line-height:23px;
+	font-weight:500;
+}
+.table h3 a{
+	color:black;
+	text-decoration:none;
+}
+.table h3 a:hover{
+	color:#009688;
+}
+.blog-author{
+	font-size:11px;
+}
+.blog-author a{
+	margin-left:3px;
+	color:black;
+	text-decoration:none;
+}

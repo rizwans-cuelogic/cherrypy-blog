@@ -1,0 +1,58 @@
+.latest-blog{
+	margin-bottom:30px;
+}
+.latest-blog .latest-text{
+	position:relative;
+}
+.latest-blog .latest-text h3{
+	margin-top:10px;
+	font-size: 21px;
+
+}
+.latest-blog .latest-text h3{
+	display:block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-family: "Lato, sans-serif";
+}
+.latest-text >.latest-label{
+	position:absolute;
+ 	top:-30px;
+	left:5px;
+}
+.latest-text .author-text a:hover{
+	color:black;
+}
+a:hover{
+	color:#009688;
+	text-decoration: none;
+}
+.latest-text .view-block:hover {
+	background-color:black;
+}
+.top-margin-40{
+	margin-top:40px;
+}
+h3 a{
+	color:black;
+}
+.separator{
+	border-bottom: 2px solid #009688;
+	padding-bottom:7px;
+	margin-bottom:20px;
+	font-weight:600;
+}
+.author-text a{
+	color:black;
+	text-decoration: none;
+}
+@media screen and (max-width:768px){
+	.latest-blog{
+		width:100%;
+	}
+	.latest-text{
+		width:100%;
+	}
+}
+
