@@ -1,7 +1,7 @@
 import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column,ForeignKey
-from sqlalchemy.types import String, Integer,DateTime,Boolean
+from sqlalchemy.types import String, Integer,DateTime,Boolean,LargeBinary
 from sqlalchemy.orm import relationship
 # from .blogmodel import Blog
 
@@ -19,6 +19,7 @@ class User(ORMBase):
 	Gender = Column(String(10),nullable=True)
 	password = Column(String(128))
 	blogs = relationship('Blog',backref='author',cascade='all,delete',lazy='dynamic')
+	files = relationship('Attachments',backref='uploader',cascade='all,delete',lazy='dynamic')
 
 class Blog(ORMBase):
 
@@ -29,4 +30,13 @@ class Blog(ORMBase):
 	content = Column(String(),nullable=False)
 	published_date = Column(DateTime,default=datetime.datetime.utcnow)
 	published = Column(Boolean)
+	user_id = Column(Integer,ForeignKey('user.id'))
+
+class Attachments(ORMBase):
+
+	__tablename__ = 'attachments'
+
+	id = Column(Integer,primary_key=True)
+	filename = Column(String(540),nullable=False)
+	file_path = Column(String(540))
 	user_id = Column(Integer,ForeignKey('user.id'))

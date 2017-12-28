@@ -70,7 +70,7 @@ class UserClass:
 				cherrypy.request.db.commit()										
 				template = 'login_user.html'
 				return render_template(template,register_success="User Register Successfully.",
-										request=cherrypy.request)			
+										request=cherrypy.request,cherrypy=cherrypy)			
 
 			return render_template(template,request=cherrypy.request,cherrypy=cherrypy)
 

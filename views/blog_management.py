@@ -1,3 +1,4 @@
+import os
 import cherrypy
 import pagecalc
 from sqlalchemy import desc
@@ -5,13 +6,16 @@ from jinja2 import Environment,FileSystemLoader
 from helpers.register_helper import (check_empty_data,
 									check_password_length,
 									check_password_match)
-from models.usermodel import User,Blog
+from models.usermodel import User,Blog,Attachments
 from .auth import require,check_credentials
 from views.flashing import flash,render_template
 
 
 env = Environment(loader = FileSystemLoader('./templates')) 
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+app_root =  os.path.abspath(os.path.join(current_dir, os.pardir))
 
 class BlogClass(object):
 
@@ -21,25 +25,41 @@ class BlogClass(object):
 
 	@cherrypy.expose
 	@require()
-	def addblog(self,title=None,content=None,published_d=None):
+	def addblog(self,title=None,content=None,published_d=None,file_image=None):
 
-		if cherrypy.request.method=="POST":
-			email= cherrypy.request.login
-			user = cherrypy.request.db.query(User).filter_by(email=email).first()
-			if user:
-				if published_d:
-					blog = Blog(title=title,content=content,published_date=published_d,author=user)
-				else:
-					blog = Blog(title=title,content=content,author=user)
+		try:
+			if cherrypy.request.method=="POST":
+				
+				email= cherrypy.request.login
+				user = cherrypy.request.db.query(User).filter_by(email=email).first()
+				if user:
+					filename = file_image.filename
+					target = os.path.join(app_root,"images/")
+					destination = os.path.join(target,filename)
+					with open(destination,'wb') as out:
+						while True:
+							data = file_image.file.read(8192)
+							if not data:
+								break
+							out.write(data)
 
-				cherrypy.request.db.commit()
-				flash("Blog Added Successfully.")
-				raise cherrypy.HTTPRedirect('/user/home')				
+					
+					filecontent = Attachments(filename=filename,file_path=destination,uploader=user)
+
+					if published_d:
+						blog = Blog(title=title,content=content,published_date=published_d,author=user)
+					else:
+						blog = Blog(title=title,content=content,author=user)
+
+					cherrypy.request.db.commit()
+					flash("Blog Added Successfully.")
+					raise cherrypy.HTTPRedirect('/user/home')				
 
 
-		return render_template('add_blog.html',request= cherrypy.request,cherrypy=cherrypy)
-		
-
+			return render_template('add_blog.html',request= cherrypy.request,cherrypy=cherrypy)
+		except:
+			cherrypy.request.db.rollback()
+			raise
 	@cherrypy.expose
 	@require()
 	def listblog(self,page=1):

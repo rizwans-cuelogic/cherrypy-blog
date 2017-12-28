@@ -33,14 +33,21 @@
 <div class="row">
 <div class="container">
 	<div class="col-md-10">
-		<h2 class="margin-bt">Edit Blog</h2>
+		<h2 class="margin-bt">Add Blog</h2>
 	
-		<form name="Addform" action="/blog/addblog" method="post">
+		<form name="Addform" action="/blog/addblog" method="post" enctype="multipart/form-data">
 			<div class="row">
 				<div class="form-group col-md-12">
 					
 	            	<label for="title" class="control-label" required>*Title</label><br>
 	            	<input type="text" class="form-control" name="title"  required>  
+	        	</div>
+	    	</div>
+
+	    	<div class="row">
+				<div class="form-group col-md-12">
+				<label for="file_image" class="control-label" required>*Banner Image</label><br>
+				<input type="file" class="form-control" accept="image/*" name="file_image" required>  
 	        	</div>
 	    	</div>
 			

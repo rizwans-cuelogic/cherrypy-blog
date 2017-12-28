@@ -1,0 +1,15 @@
+cheroot==6.0.0
+CherryPy==13.0.0
+cp-sqlalchemy==0.5.1
+Genshi==0.7
+jaraco.classes==1.4.3
+Jinja2==2.10
+MarkupSafe==1.0
+more-itertools==4.0.1
+PageCalc==0.2.3
+portend==2.2
+psycopg2==2.7.3.2
+pytz==2017.3
+six==1.11.0
+SQLAlchemy==1.1.15
+tempora==1.9

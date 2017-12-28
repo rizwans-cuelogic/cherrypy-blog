@@ -8,11 +8,16 @@ from cp_sqlalchemy import SQLAlchemyTool, SQLAlchemyPlugin
 
 
 def start_server():
-
+	
 	sessions_dir = os.getcwd()+'/sessions'
+
+	image_dir = os.getcwd() + '/images'
 
 	if not os.path.exists(sessions_dir):
 		os.makedirs(sessions_dir)
+
+	if not os.path.exists(image_dir):
+		os.makedirs(image_dir)
 
 	server_config = {
 
