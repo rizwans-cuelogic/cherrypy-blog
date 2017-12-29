@@ -3,6 +3,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<scri   pt src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
@@ -26,7 +27,12 @@
 			width:30%;
 		}
 		#ui-datepicker-div{ top:450px !important; }
+
+		#attachments{
+			display:none;
+		}
 	</style>
+
 {% endblock %}
 {% block content %}
 	
@@ -35,7 +41,7 @@
 	<div class="col-md-10">
 		<h2 class="margin-bt">Edit Blog</h2>
 	
-		<form name="editform" action="" method="post">
+		<form name="editform" action="/blog/blog_edit/{{ blog.id }}" method="post" enctype="multipart/form-data">
 			<div class="row">
 				<div class="form-group col-md-12">
 					
@@ -50,7 +56,21 @@
 					<textarea class=".content" rows="15" name="content">{{ blog.content }}</textarea>	  
 	        	</div>
 	    	</div>
-	  
+	  		
+		  	<div class="row">
+	            <div class="form-group col-md-12">
+	            	<label class="control-label">Blog Image</label>
+	                <input type="file" id="attachments" class="form-control" accept="image/*" name="file_image" required>
+	            </div>  
+	           {% if blog.files[0] %}
+	            <div id="preview" class="col-md-3">
+	                <img class="img-responsive" src="/static/images/{{ blog.files[0].filename }}"/>
+	                <button class="media-button" id="button1" type="button" value="{{ blog.files[0].id }}" data-toggle="tooltip" title="remove this image"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+	            </div>
+	           {% endif %}
+			</div>
+				
+			
 			<div class="row">
 				<div class="form-group col-md-12">
 				
@@ -70,4 +90,8 @@
 </div>
 </div>
 
+{% endblock %}
+
+{% block bottomcontent %}
+<script type="text/javascript" src="/static/js/edit_blog.js"></script>
 {% endblock %}

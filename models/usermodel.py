@@ -19,7 +19,6 @@ class User(ORMBase):
 	Gender = Column(String(10),nullable=True)
 	password = Column(String(128))
 	blogs = relationship('Blog',backref='author',cascade='all,delete',lazy='dynamic')
-	files = relationship('Attachments',backref='uploader',cascade='all,delete',lazy='dynamic')
 
 class Blog(ORMBase):
 
@@ -31,6 +30,7 @@ class Blog(ORMBase):
 	published_date = Column(DateTime,default=datetime.datetime.utcnow)
 	published = Column(Boolean)
 	user_id = Column(Integer,ForeignKey('user.id'))
+	files = relationship('Attachments',backref='parent',cascade='all,delete',lazy='dynamic')
 
 class Attachments(ORMBase):
 
@@ -40,3 +40,4 @@ class Attachments(ORMBase):
 	filename = Column(String(540),nullable=False)
 	file_path = Column(String(540))
 	user_id = Column(Integer,ForeignKey('user.id'))
+	blog_id = Column(Integer,ForeignKey('blog.id'))

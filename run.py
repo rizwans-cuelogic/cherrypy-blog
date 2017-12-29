@@ -11,7 +11,7 @@ def start_server():
 	
 	sessions_dir = os.getcwd()+'/sessions'
 
-	image_dir = os.getcwd() + '/images'
+	image_dir = os.getcwd() + '/static/images'
 
 	if not os.path.exists(sessions_dir):
 		os.makedirs(sessions_dir)
