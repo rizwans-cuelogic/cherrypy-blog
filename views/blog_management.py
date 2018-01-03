@@ -90,8 +90,6 @@ class BlogClass(object):
 	def blog_edit(self,id=None,title=None,content=None,published_d=None,file_image=None):
 		
 		blog = cherrypy.request.db.query(Blog).filter_by(id = id).first()
-		import pdb
-		pdb.set_trace()
 		if blog:
 
 			if cherrypy.request.method == "POST":
@@ -132,7 +130,7 @@ class BlogClass(object):
 			cherrypy.request.db.delete(blog)
 			cherrypy.request.db.commit()
 			flash("Blog Deleted Successfully.")
-			raise cherrypy.HTTPRedirect('/blog/listblog')
+			return json.dumps({"message":"Deleted Successfully."})
 
 
 	@cherrypy.expose

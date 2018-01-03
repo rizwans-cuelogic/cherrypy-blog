@@ -28,7 +28,7 @@
 					<a class="btn btn-primary" href="/blog/blog_edit/{{ blog.id }}">Edit</a>		
 				</td>
 				<td class="content-middle text-right">
-					<a class="btn btn-danger" href="/blog/blog_delete/{{ blog.id }}">Delete</a>					
+					<a id="del-bt" class="btn btn-danger" data-value="{{ blog.id }}">Delete</a>					
 				</td>
 			</tr>
 		{% endfor %}
@@ -43,3 +43,7 @@
 
 {% endblock %}
 
+{% block bottomcontent %}
+<script type="text/javascript" src="/static/js/list_blog.js"></script>
+
+{% endblock %}

@@ -4,6 +4,16 @@
 .latest-blog .latest-text{
 	position:relative;
 }
+.latest-blog img{
+	width:100% ;
+	min-height:170px;
+}
+.latest-blog .image-wrap {
+	height:170px;
+	overflow:hidden;
+	display: block;
+	position:relative;
+}
 .latest-blog .latest-text h3{
 	margin-top:10px;
 	font-size: 21px;

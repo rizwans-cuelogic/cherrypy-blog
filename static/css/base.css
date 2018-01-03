@@ -7,13 +7,39 @@
   font-size: 12px;
   letter-spacing: 5px;
 }
+.navbar-inverse .navbar-brand{
+  color:#f5f5f5;
+  font-weight:bolder;
+}
+.navbar-inverse .navbar-nav>li>a{
+  color:#f5f5f5;
+  text-transform: uppercase;
+  line-height:1.5;
+  letter-spacing: 1px;
+  font-weight:bolder; 
+}
 .navbar-nav  li a:hover {
   color: #1abc9c !important;
 }
+.jumbotron{
+  color: white;
+}
+.jumbotron p{
+  font-family: Lora, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height : 31.5px;
+}
+.jumbotron h1{
+  font-size: 100px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  font-weight: 700;
+  font-family: Cabin,'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
 p {font-size: 16px;}
 
 .bg-4 { 
-  background-color: #2f2f2f; /* Black Gray */
+  background-color: #101010; /* Black Gray */
   color: #fff;
   bottom:0;
 }

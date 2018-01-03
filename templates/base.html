@@ -10,7 +10,7 @@
     {% endblock %}
 	</head>
 	<body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-inverse bg-inverse">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -19,9 +19,9 @@
         <span class="icon-bar"></span>                        
       </button>
       {% if not cherrypy.session['_cp_username'] %}
-        <a class="navbar-brand" href="/">Blogger</a>
+        <a class="navbar-brand" href="/">GREYSCALE</a>
       {% else %}
-        <a class="navbar-brand" href="/user/home">Blogger</a>
+        <a class="navbar-brand" href="/user/home">GREYSCALE</a>
       {% endif %}
 
     </div>

@@ -12,8 +12,9 @@
     	<p class="margin-tp">{{ message }}</p>
   	{% endfor %}
 		<div class="jumbotron">
-	 			<h1>Blogger World</h1>      
-				<p>Blogger is the most popular blogging platform for people on the web.</p>
+	 			<h1 class="banner-h1">GREYSCALE</h1>      
+				<p>Greyscale is leading blogger community in professional world on the web.</p>
+				<p>Join and become part of prestigious community.</p>
 		</div>
 	</div>
 	<div class="container">
@@ -27,6 +28,9 @@
 				<div class="this-row col-md-5">
 					<div class="latest-blog">
 						<div class="latest-text">
+							<a class="image-wrap" href="/blog/blog_detail/{{ blog.id }}">
+								<img src="/static/images/{{ blog.files[0].filename }}">
+							</a>
 							<h3><a href="/blog/blog_detail/{{ blog.id }}" title="{{blog.title}}">{{blog.title}}</a></h3>
 							<span class="author-text"><a href=""><strong>{{ blog.author.username }}</strong></a> -   {{  momentjs(blog.published_date).format('LL')  }}</span>
 							
