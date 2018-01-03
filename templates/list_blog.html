@@ -2,12 +2,25 @@
 {% block head %}
 	<link rel="stylesheet" type="text/css" href="/static/css/listblog.css"/>
 	<link rel="stylesheet" type="text/css" href="/static/css/paginator.css"/>
+	<style>
+		.button-t {
+			font-family: "Roboto", sans-serif;
+			text-transform: uppercase;
+			outline: 0;
+			border: 0;
+			padding: 15px;
+			font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+			transition: all 0.3 ease;
+			cursor: pointer;
+		}
+	</style>
 {% endblock %}
 
 {% block content %}
 	<div class="container-fluid text-center">
 	{% for message in messages %}
-    		<p class="margin-tp color-style">{{ message }}</p>
+    		<p class="margin-tp">{{ message }}</p>
   	{% endfor %}
   	</div>
 	<div class="container">

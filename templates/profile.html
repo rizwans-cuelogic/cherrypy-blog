@@ -23,7 +23,7 @@
   text-transform: uppercase;
   outline: 0;
   background: #4CAF50;
-  width: 100%;
+  width: 30%;
   border: 0;
   padding: 15px;
   color: #FFFFFF;
@@ -39,11 +39,12 @@
 	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-offset-4 col-md-4">
-				{% for message in messages %}
-					<p class="margin-tp text-center">	{{ message }}</p>
-				{% endfor %}
-				<h1>User Profile</h1>
+			{% for message in messages %}
+				<p class="margin-tp text-center">{{ message }}</p>
+			{% endfor %}
+			
+			<div class="col-md-6">
+			<h1>Personal Info</h1>
 			</div>
 		</div><br>
 		<div class="row">

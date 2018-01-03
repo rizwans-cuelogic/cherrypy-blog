@@ -4,7 +4,8 @@
 {% block head %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<scri   pt src="//code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/addblog.css"/>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
 	$(function() {
@@ -20,13 +21,8 @@
     }
 						});</script>
 	<style>
-		.margin-bt{
-			margin-bottom: 20px;
-		}
-		.dtpick{
-			width:30%;
-		}
-		#ui-datepicker-div{ top:684px !important;}
+	
+		#ui-datepicker-div{ top:733px !important;}
 
 		#attachments{
 			display:none;
@@ -46,21 +42,21 @@
 				<div class="form-group col-md-12">
 					
 	            	<label for="title" class="control-label" required>*Title</label><br>
-	            	<input type="text" class="form-control" name="title" value="{{ blog.title }}" required>  
+	            	<input type="text" class="input-t" name="title" value="{{ blog.title }}" required>  
 	        	</div>
 	    	</div>
 			
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label for="content" class="control-label">*Content</label><br>
-					<textarea class=".content" rows="15" name="content">{{ blog.content }}</textarea>	  
+					<textarea class=".content input-t" rows="15" name="content">{{ blog.content }}</textarea>	  
 	        	</div>
 	    	</div>
 	  		
 		  	<div class="row">
 	            <div class="form-group col-md-12">
 	            	<label class="control-label">Blog Image</label>
-	                <input type="file" id="attachments" class="form-control" accept="image/*" name="file_image" required>
+	                <input type="file" id="attachments" class="input-t" accept="image/*" name="file_image" required>
 	            </div>  
 	           {% if blog.files[0] %}
 	            <div id="preview" class="col-md-3">
@@ -75,13 +71,13 @@
 				<div class="form-group col-md-12">
 				
             	<label for="published_d" class="control-label">Publication_date</label><br>
-            	<input type="text" name=published_d class="form-control dtpick" value ="{{ blog.published_date.date() }}">
+            	<input type="text" name=published_d class="dtpick input-t date-t" value ="{{ blog.published_date.date() }}">
             	  
             	</div>  
         	</div>
 	        <div class="row">
 				<div class="form-group col-md-12">
-	            	<button type="submit" class="btn btn-success">Save</button>	
+	            	<button type="submit" class="btn btn-success button-t">Save</button>	
 	            </div>  
 	        </div>		
 			

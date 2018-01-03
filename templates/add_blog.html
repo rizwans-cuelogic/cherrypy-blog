@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<scri   pt src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/addblog.css"/>
+
 	<script>
 	$(function() {
 		$( ".dtpick" ).datepicker({ dateFormat: 'yy/mm/dd',
@@ -17,26 +19,10 @@
 							setup: function(ed) {
         ed.on('submit', function(e) { ed.save(); });
     }
-						});</script>
+						});
+	</script>
 	<style>
-		.margin-bt{
-			margin-bottom: 20px;
-		}
-		.dtpick{
-			width:30%;
-		}
-		#ui-datepicker-div{ top:560px !important; }
-		.input-t{
- 			font-family: "Roboto", sans-serif;
-  			outline: 0;
-  			background: #f2f2f2;
-  			width: 100%;
-  			border: 0;
-  			margin: 0 0 15px;
-  			padding: 15px;
-  			box-sizing: border-box;
-  			font-size: 14px;
-		}
+		#ui-datepicker-div{ top:620px !important; }
 	</style>
 {% endblock %}
 {% block content %}
@@ -73,12 +59,12 @@
 				<div class="form-group col-md-12">
 				
             	<label for="published_d" class="control-label">Publication_date</label><br>
-            	<input type="text" name=published_d class="dtpick input-t">  
+            	<input type="text" name=published_d class="dtpick input-t date-t">  
             	</div>  
         	</div>
 	        <div class="row">
 				<div class="form-group col-md-12">
-	            	<button type="submit" class="btn btn-success">Add</button>	
+	            	<button type="submit" class="btn btn-success button-t">Add</button>	
 	            </div>  
 	        </div>		
 			
