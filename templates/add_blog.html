@@ -26,6 +26,17 @@
 			width:30%;
 		}
 		#ui-datepicker-div{ top:560px !important; }
+		.input-t{
+ 			font-family: "Roboto", sans-serif;
+  			outline: 0;
+  			background: #f2f2f2;
+  			width: 100%;
+  			border: 0;
+  			margin: 0 0 15px;
+  			padding: 15px;
+  			box-sizing: border-box;
+  			font-size: 14px;
+		}
 	</style>
 {% endblock %}
 {% block content %}
@@ -40,14 +51,14 @@
 				<div class="form-group col-md-12">
 					
 	            	<label for="title" class="control-label" required>*Title</label><br>
-	            	<input type="text" class="form-control" name="title"  required>  
+	            	<input type="text" class="input-t" name="title" placeholder="title" required>  
 	        	</div>
 	    	</div>
 
 	    	<div class="row">
 				<div class="form-group col-md-12">
 				<label for="file_image" class="control-label" required>*Banner Image</label><br>
-				<input type="file" class="form-control" accept="image/*" name="file_image" required>  
+				<input type="file" class="input-t" accept="image/*" name="file_image" required>  
 	        	</div>
 	    	</div>
 			
@@ -62,7 +73,7 @@
 				<div class="form-group col-md-12">
 				
             	<label for="published_d" class="control-label">Publication_date</label><br>
-            	<input type="text" name=published_d class="form-control dtpick">  
+            	<input type="text" name=published_d class="dtpick input-t">  
             	</div>  
         	</div>
 	        <div class="row">

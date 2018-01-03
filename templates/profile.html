@@ -6,7 +6,32 @@
 		overflow: hidden;
 		resize:none;
 	}
-		
+
+.input-t{
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.button-t {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}		
 </style>
 {% endblock %}
 
@@ -29,7 +54,7 @@
 					<div class="form-group col-md-12">
 					
             			<label for="title" class="control-label">Username</label><br>
-            			<input type="text" class="form-control" name=username value="{{ user.username }}" required readonly="">
+            			<input type="text" class="input-t" name=username value="{{ user.username }}" required readonly="">
             			 
         			</div>
     			</div>
@@ -37,32 +62,32 @@
 					<div class="form-group col-md-12">
 					
             			<label for="email" class="control-label">Email</label><br>
-            			<input type="email" class="form-control" name="email" value="{{ user.email }}" required>  
+            			<input type="email" class="input-t" name="email" value="{{ user.email }}" required>  
         			</div>
     			</div>
 				<div class="row">
 					<div class="form-group col-md-12">
 		            	<label for="address" class="control-label">Address</label><br>
-		            	<textarea class="form-control" name=Address rows="5">{% if user.Address %}{{ user.Address }}{% endif %}</textarea>
+		            	<textarea class="input-t" name=Address rows="5">{% if user.Address %}{{ user.Address }}{% endif %}</textarea>
 		            </div>  
 		        </div>
 		        <div class="row">
 					<div class="form-group col-md-12">
 						<label for="contact" class="control-label">Contact</label><br>
-		            	<input type="tel" class="form-control" name="contact">  
+		            	<input type="tel" class="input-t" name="contact">  
 		        	</div>
 		    	</div>
 				<div class="row">
 					<div class="form-group col-md-12">
 						<label for="gender" class="control-label">Gender</label><br>
-		            	<select class="form-control" name="gender">
+		            	<select class="input-t" name="gender">
 		            		<option value="Male">Male</option>
 		            		<option value="Female">Female</option>
 		            		<option value="Other">Other</option>
 		            	</select> 
 		        	</div>
 		    	</div>
-		    	<input type="submit" value="Save" class="btn btn-success">
+		    	<input type="submit" value="Save" class="btn btn-success button-t">
     			</form>
     		</div>
 			
