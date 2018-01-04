@@ -43,8 +43,9 @@ def start_server():
 	}
 	cherrypy.tools.db = SQLAlchemyTool()
 	sqlalchemy_plugin=SQLAlchemyPlugin(
-		cherrypy.engine, ORMBase, 'postgresql://postgres:admin123@localhost:5432/blog_cherry'
+		cherrypy.engine, ORMBase, os.environ['DATABASE_URL'] 
 	)
+	#'postgresql://postgres:admin123@localhost:5432/blog_cherry'
 	sqlalchemy_plugin.subscribe()
 	sqlalchemy_plugin.create()
 	cherrypy.config.update(server_config)
