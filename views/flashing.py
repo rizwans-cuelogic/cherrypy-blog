@@ -68,8 +68,7 @@ def get_messages():
         return list()
         
 def render_template(template, **kwargs):
-    import pdb
-    pdb.set_trace()
+    
     env.globals['url'] = cherrypy.url
     env.globals['momentjs'] = momentjs
     kwargs['messages'] = get_messages()
