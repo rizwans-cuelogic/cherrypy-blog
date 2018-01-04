@@ -62,4 +62,4 @@ try:
 	application=start_server()
 
 except Exception as exe:
-	print exe	
+	print(exe)	
