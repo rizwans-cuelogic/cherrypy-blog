@@ -26,6 +26,7 @@ def start_server():
 		"engine.autoreload.on": True,
 
 		"tools.sessions.on":True,
+		'tools.sessions.locking': 'early'
 		"tools.sessions.storage_type":"file",
 		"tools.sessions.storage_path":sessions_dir,
 		"tools.sessions.timeout":180,
