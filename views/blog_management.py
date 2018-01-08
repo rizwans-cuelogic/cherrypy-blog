@@ -77,11 +77,14 @@ class BlogClass(object):
 
 	@cherrypy.expose
 	def blog_detail(self,id=None,content=None,parentid=None):
-	
+		
+
 		blog = cherrypy.request.db.query(Blog).filter_by(id = id).first()
 		
-		email= cherrypy.session['_cp_username']
-		user = cherrypy.request.db.query(User).filter_by(email=email).first()
+		if '_cp_username' in cherrypy.session:
+			if cherrypy.session['_cp_username'] != None:
+				email= cherrypy.session['_cp_username']
+				user = cherrypy.request.db.query(User).filter_by(email=email).first()
 
 		if cherrypy.request.method == 'POST':
 			
@@ -152,9 +155,6 @@ class BlogClass(object):
 	@cherrypy.expose
 	@require()
 	def all_blog(self,page=1):
-
-		import pdb
-		pdb.set_trace()
 
 		page = int(page)
 		email= cherrypy.request.login

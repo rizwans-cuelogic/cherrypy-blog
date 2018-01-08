@@ -30,11 +30,13 @@
 			</main>
 		</div>
 	</div>
-	{% if cherrypy.session['_cp_username'] %}
+	{% if '_cp_username' in cherrypy.session %}
+
+	{% if cherrypy.session['_cp_username'] != None %}
 	<div class="container">
 	<div class="row">
 		<div class="col-md-8">
-			<h1>Comments</h1>
+			<h1 class="lead">Comments</h1>
 			<form action="" method="post" name="commentform">
 				<div class="form-group">
 					<textarea class="form-control" rows="4" name="content" required></textarea>
@@ -93,6 +95,7 @@
 			{% endfor %}
 		{% endfor %}
 	</div>
+	{% endif %}
 	{% endif %}	
 {% endblock %}
 
