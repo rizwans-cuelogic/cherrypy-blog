@@ -19,6 +19,7 @@ class User(ORMBase):
 	Gender = Column(String(10),nullable=True)
 	password = Column(String(128))
 	blogs = relationship('Blog',backref='author',cascade='all,delete',lazy='dynamic')
+	user_comments = relationship('Comment', backref='commentator',cascade="all,delete",lazy='dynamic')
 
 class Blog(ORMBase):
 
@@ -31,6 +32,7 @@ class Blog(ORMBase):
 	published = Column(Boolean)
 	user_id = Column(Integer,ForeignKey('user.id'))
 	files = relationship('Attachments',backref='parent',cascade='all,delete',lazy='dynamic')
+	comments = relationship('Comment',backref='blog',cascade="all,delete",lazy='dynamic')
 
 class Attachments(ORMBase):
 
@@ -41,3 +43,16 @@ class Attachments(ORMBase):
 	file_path = Column(String(540))
 	user_id = Column(Integer,ForeignKey('user.id'))
 	blog_id = Column(Integer,ForeignKey('blog.id'))
+
+
+class Comment(ORMBase):
+
+	__tablename__ = 'comment'
+
+	id = Column(Integer,primary_key=True)
+	content = Column(String(),nullable=False)
+	created = Column(DateTime,default=datetime.datetime.utcnow)
+	user_id = Column(Integer,ForeignKey('user.id'))
+	blog_id = Column(Integer,ForeignKey('blog.id'))
+	parent = Column(Integer,ForeignKey('comment.id'),nullable=True)
+	cm_replies = relationship('Comment',remote_side=[id],backref='replies',cascade="all,delete",lazy="joined")

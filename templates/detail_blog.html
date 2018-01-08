@@ -3,7 +3,11 @@
 {% block head %}
 	<link rel="stylesheet" type="text/css" href="/static/css/detailblog.css"/>
 	<script src="/static/js/moment.min.js"></script>
-
+	<script type="text/javascript">
+		function toggler(divId) {
+    		$("." + divId).toggle();
+		}
+	</script>
 {% endblock %}
 {% block content %}
 	<div class="container">
@@ -13,7 +17,7 @@
 						
 						<h1>{{blog.title}}</h1>
 
-						<span class="blog-author">By <a href="#"><strong>{{blog.author.username}}</strong></a> - {{ momentjs(blog.published_date).format('LL') }}</span></span>
+						<span class="blog-author">By <a href="#"><strong>{{blog.author.username}}</strong></a> - {{ momentjs(blog.published_date).format('LL') }}</span>
 					</div>
 					<div class="blog-img">
 					
@@ -25,7 +29,71 @@
 					</div>
 			</main>
 		</div>
-	</div>	
+	</div>
+	{% if cherrypy.session['_cp_username'] %}
+	<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<h1>Comments</h1>
+			<form action="" method="post" name="commentform">
+				<div class="form-group">
+					<textarea class="form-control" rows="4" name="content" required></textarea>
+				</div>
+				<div>
+					<input type="submit" class="btn btn-success">
+				</div>
+			</form>
+		</div>
+	</div>
+		{% for comment in comments %}
+			{% if  not comment.cm_replies %}
+			<blockquote>
+                <div class="pull-left image">
+                    <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+                </div>
+				<h4>{{ comment.content }}</h4>
+				<span class="blog-author author-mr"> - by {{ comment.commentator.username }}</span>
+				<span class="sub-text">{{ momentjs(comment.created).fromNow() }}</span>
+				<button class="btn btn-success button-cl" onclick="toggler('{{ comment.id }}');">reply</button>
+					<div class = "{{ comment.id }}" style="display:none;">
+						<form action = "" method="post" name="comment-reply-form" class="reply-form">
+							<div class="form-group">
+								<textarea class="form-control" rows="1" name="content" required></textarea>
+								<input type="hidden" name="parentid" value="{{ comment.id }}">
+							</div>
+							<div>
+								<input type="submit" class="btn btn-success">
+							</div>
+						</form>
+					</div>			
+			</blockquote>
+			{% endif %}
+			{% for reply in comment.replies recursive %}
+				<blockquote class="blockqoute mr-l">
+				<div class="pull-left image">
+                    <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+                </div>
+				<h4>{{ reply.content }}</h4>
+				<span class="blog-author author-mr"> - by {{ reply.commentator.username}}</span>
+				<span class="sub-text">{{ momentjs(reply.created).fromNow() }}</span>
+				{{ loop(reply.replies) }}
+				<button class="btn btn-success button-cl" onclick="toggler('{{ reply.id }}');">reply</button>
+				<div class = "{{ reply.id }}" style="display:none;">
+					<form action = "" method="post" name="replyform" class="reply-form">
+						<div class="form-group">
+							<textarea class="form-control" rows="1" name="content" required></textarea>
+							<input type="hidden" name="parentid" value="{{ comment.id }}">
+						</div>
+						<div>
+							<input type="submit" class="btn btn-success">
+						</div>
+					</form>			
+				</div>
+				</blockquote>
+			{% endfor %}
+		{% endfor %}
+	</div>
+	{% endif %}	
 {% endblock %}
 
 {% block bottomcontent %}

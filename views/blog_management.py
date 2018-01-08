@@ -7,7 +7,7 @@ from jinja2 import Environment,FileSystemLoader
 from helpers.register_helper import (check_empty_data,
 									check_password_length,
 									check_password_match)
-from models.usermodel import User,Blog,Attachments
+from models.usermodel import User,Blog,Attachments,Comment
 from .auth import require,check_credentials
 from views.flashing import flash,render_template
 
@@ -76,13 +76,29 @@ class BlogClass(object):
 		return render_template('list_blog.html',blogs=blogs,paginator=pages,request=cherrypy.request,cherrypy=cherrypy)
 
 	@cherrypy.expose
-	def blog_detail(self,id=None):
-		
+	def blog_detail(self,id=None,content=None,parentid=None):
+	
 		blog = cherrypy.request.db.query(Blog).filter_by(id = id).first()
+		
+		email= cherrypy.session['_cp_username']
+		user = cherrypy.request.db.query(User).filter_by(email=email).first()
 
-		if blog:
+		if cherrypy.request.method == 'POST':
+			
+			if parentid is None:
 
-			return render_template('detail_blog.html',blog=blog,request=cherrypy.request,cherrypy=cherrypy)
+				comment = Comment(content = content,blog=blog,commentator=user)
+				cherrypy.request.db.commit()
+
+			else:
+				comment = Comment(content = content,blog=blog,commentator=user,parent=int(parentid))
+				cherrypy.request.db.commit()					
+			
+			raise cherrypy.HTTPRedirect("/blog/blog_detail/"+str(blog.id))
+
+		comments=blog.comments.all()
+
+		return render_template('detail_blog.html',blog=blog,comments=comments,request=cherrypy.request,cherrypy=cherrypy)
 
 
 	@cherrypy.expose
@@ -136,6 +152,9 @@ class BlogClass(object):
 	@cherrypy.expose
 	@require()
 	def all_blog(self,page=1):
+
+		import pdb
+		pdb.set_trace()
 
 		page = int(page)
 		email= cherrypy.request.login
