@@ -64,6 +64,12 @@ class UserClass:
 					return render_template(template,password_error = "Password And Confirm Password Should Be Same",
 											request=cherrypy.request,cherrypy=cherrypy)
 
+
+				user = cherrypy.request.db.query(User).filter_by(email = email).first()
+				
+				if user:
+					return render_template(template,error = "User already exists",
+											request=cherrypy.request,cherrypy=cherrypy)
 				user = User(username=username,email=email,password=password)
 
 				cherrypy.request.db.add(user)
