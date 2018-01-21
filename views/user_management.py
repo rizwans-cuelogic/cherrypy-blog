@@ -118,6 +118,7 @@ class UserClass:
 	@cherrypy.expose
 	@require()
 	def user_profile(self,username=None,gender=None,email=None,contact=None,Address=None):
+		
 		try:
 			email= cherrypy.request.login
 			user = cherrypy.request.db.query(User).filter_by(email=email).first()
